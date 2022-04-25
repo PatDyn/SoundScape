@@ -4,7 +4,9 @@ scripts
 This directory contains scripts for the `SoundScape` project, in particular:
 
 - [Retrieve `ammenities` from OpenStreetMap](#retrieve-ammenities-from-openstreetmap)
-- Retrieve
+- [Retrieve genre seeds from Spotify](#retrieve-genre-seeds-from-spotify)
+- Retrieve track information from Spotify
+- Retrieve audio features from Spotify
 
 # Setup
 
@@ -69,4 +71,44 @@ python3 retrieve_genres.py
 >>> blues
 >>> bossanova
 >>> .......
+```
+
+# Retrieve track information and features
+
+Given some track IDs you can use the two scripts to retrieve their information and features respectively.
+
+For instance, given the tracks `7ouMYWpwJ422jRcDASZB7P 4VqPOruhp5EdPBeR92t6lQ 2takcwOaAZWiXQijPHIx7B`: 
+
+```
+python3 retrieve_tracks.py 7ouMYWpwJ422jRcDASZB7P 4VqPOruhp5EdPBeR92t6lQ 2takcwOaAZWiXQijPHIx7B >>
+tracks.jsonl
+cat tracks.jsonl | jq -r '.name'
+
+>>> Knights of Cydonia
+>>> Uprising
+>>> Time is Running Out
+
+python3 retrieve_track_features.py 7ouMYWpwJ422jRcDASZB7P 4VqPOruhp5EdPBeR92t6lQ 2takcwOaAZWiXQijPHIx7B >> track_features.jsonl
+head -n 1 track_features.jsonl | jq '.'
+
+>>> {
+>>>   "danceability": 0.366,
+>>>   "energy": 0.963,
+>>>   "key": 11,
+>>>   "loudness": -5.301,
+>>>   "mode": 0,
+>>>   "speechiness": 0.142,
+>>>   "acousticness": 0.000273,
+>>>   "instrumentalness": 0.0122,
+>>>   "liveness": 0.115,
+>>>   "valence": 0.211,
+>>>   "tempo": 137.114,
+>>>   "type": "audio_features",
+>>>   "id": "7ouMYWpwJ422jRcDASZB7P",
+>>>   "uri": "spotify:track:7ouMYWpwJ422jRcDASZB7P",
+>>>   "track_href": "https://api.spotify.com/v1/tracks/7ouMYWpwJ422jRcDASZB7P",
+>>>   "analysis_url": "https://api.spotify.com/v1/audio-analysis/7ouMYWpwJ422jRcDASZB7P",
+>>>   "duration_ms": 366213,
+>>>   "time_signature": 4
+>>> }
 ```
