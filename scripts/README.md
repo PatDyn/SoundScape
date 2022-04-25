@@ -4,6 +4,7 @@ scripts
 This directory contains scripts for the `SoundScape` project, in particular:
 
 - [Retrieve `ammenities` from OpenStreetMap](#retrieve-ammenities-from-openstreetmap)
+- Retrieve
 
 # Setup
 
@@ -38,3 +39,34 @@ cat bars_tuebingen.jsonl | jq -r '.tags.name'
 ```
 
 The full list of available ammenity types is on the [OSM wiki](https://wiki.openstreetmap.org/wiki/Key:amenity).
+
+# Setup Spotify
+
+Follow the [Spotify Authorization guide](https://developer.spotify.com/documentation/general/guides/authorization/). For the scripts we're building a __server__ type application. You will get a `CLIENT_ID` and `CLIENT_SECRET`.
+
+Spotify scripts generally assume you have those set up as environment variables, e.g like so:
+
+```
+export CLIENT_ID=abc
+export CLIENT_SECRET=def
+```
+
+# Retrieve Genre Seeds from Spotify
+
+If you've set up your Spotify this is as easy as running
+
+```
+python3 retrieve_genres.py
+
+>>> acoustic
+>>> afrobeat
+>>> alt-rock
+>>> alternative
+>>> ambient
+>>> anime
+>>> black-metal
+>>> bluegrass
+>>> blues
+>>> bossanova
+>>> .......
+```
