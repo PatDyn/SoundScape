@@ -10,8 +10,8 @@
         <option name="gradleJvm" value="Android Studio default JDK" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/Documents/Programming/Android/SoundScape" />
-            <option value="$USER_HOME$/Documents/Programming/Android/SoundScape/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
