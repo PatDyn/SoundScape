@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:drawablePadding="8dp"
         android:padding="8dp"
-        android:text="Log in with Spotify"
+        android:text="@string/log_in_with_spotify"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

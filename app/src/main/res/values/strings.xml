@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SoundScape</string>
+    <string name="log_in_with_spotify">Log in with Spotify</string>
 </resources>
