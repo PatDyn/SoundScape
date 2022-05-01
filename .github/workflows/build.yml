@@ -3,7 +3,7 @@ name: Android APK CI/CD
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - 'v*'
 
