@@ -45,7 +45,10 @@ fun spotifyLogin(context: Context) {
         SpotifyConstants.CLIENT_ID,
         AuthorizationResponse.Type.TOKEN,
         SpotifyConstants.REDIRECT_URI
-    )
+    ).setScopes(Array<String>(1){"user-read-private,user-top-read"})
+    /* user-read private, for profile pic and name,
+    *  user-top-read, gets top tracks (or artists, up to 50) from all time,
+    *  last ~6months or ~4weeks.*/
 
     val request: AuthorizationRequest = builder.build()
 
