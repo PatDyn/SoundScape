@@ -7,7 +7,7 @@ Find a place playing your music
 Codelab: https://codelabs.developers.google.com/?product=android  
 Basics: https://developer.android.com/codelabs/basic-android-kotlin-compose-text-composables?hl=en#6  
 
-Theming: https://developer.android.com/jetpack/compose/layouts   
+Theming: https://developer.android.com/jetpack/compose/themes   
 Layouts: https://developer.android.com/jetpack/compose/layouts  
 
 Navigation: https://developer.android.com/jetpack/compose/navigation  
