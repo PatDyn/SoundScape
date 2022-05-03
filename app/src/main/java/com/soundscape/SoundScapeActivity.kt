@@ -20,6 +20,7 @@ import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import com.soundscape.infrastructure.SpotifyConstants
+import com.soundscape.infrastructure.findActivity
 import com.soundscape.userinterface.LoginBody
 import com.soundscape.userinterface.MainBody
 
@@ -33,12 +34,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// We need to know which activity we're in
-fun Context.findActivity(): ComponentActivity? = when (this) {
-    is ComponentActivity -> this
-    is ContextWrapper -> baseContext.findActivity()
-    else -> null
-}
 
 fun spotifyLogin(context: Context) {
     val activity = context.findActivity()

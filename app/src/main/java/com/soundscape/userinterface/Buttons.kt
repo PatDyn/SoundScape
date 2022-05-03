@@ -3,11 +3,12 @@ package com.soundscape.userinterface
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.soundscape.R
 import com.soundscape.spotifyLogin
+import com.soundscape.infrastructure.getBarList
 
 @Composable
 fun LoginWithSpotifyButton() {
@@ -27,10 +28,21 @@ fun ContinueWithLocalButton(onClick: () -> Unit) {
     }
 }
 
+
 @Composable
 fun ListBarsButton() {
-    TextButton(onClick = { /*TODO*/ })
-    {
-        Text(stringResource(R.string.list_bars))
+    var clicked by remember { mutableStateOf(false) }
+    if (clicked) {
+        val context = LocalContext.current
+        val bars = getBarList(context)
+        BarDisplay(bars) }
+    else {
+        TextButton(onClick = { clicked = true } )
+        {
+            Text(stringResource(R.string.list_bars))
+        }
     }
 }
+
+
+
