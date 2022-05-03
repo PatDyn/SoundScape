@@ -50,7 +50,7 @@ fun spotifyLogin(context: Context) {
 
     AuthorizationClient.openLoginActivity(
         activity,
-        SpotifyConstants.AUTH_TOKEN_REQUEST_CODE,
+        SpotifyConstants.AUTH_TOKEN_REQUEST_CODE as Int,
         request
     )
 }
