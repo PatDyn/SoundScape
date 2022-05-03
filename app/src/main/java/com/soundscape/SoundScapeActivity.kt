@@ -9,29 +9,31 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import com.soundscape.infrastructure.SpotifyConstants
+import com.soundscape.userinterface.LoginBody
+import com.soundscape.userinterface.MainBody
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             // TODO: Add a theme for consistent colouring
-            Surface(color = MaterialTheme.colors.background) {}
-
+            SoundScapeApp()
         }
     }
 }
 
-
+// We need to know which activity we're in
 fun Context.findActivity(): ComponentActivity? = when (this) {
     is ComponentActivity -> this
     is ContextWrapper -> baseContext.findActivity()
@@ -40,7 +42,6 @@ fun Context.findActivity(): ComponentActivity? = when (this) {
 
 fun spotifyLogin(context: Context) {
     val activity = context.findActivity()
-
     val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
         SpotifyConstants.CLIENT_ID,
         AuthorizationResponse.Type.TOKEN,
@@ -62,30 +63,29 @@ fun spotifyLogin(context: Context) {
 @Preview(showBackground = true)
 @Composable
 fun SoundScapePreview(){
-    Surface()
+    SoundScapeApp()
 }
 
 @Composable
-fun Surface() {
-    LoginWithSpotifyButton()
-    ContinueWithLocalButton()
-}
+fun SoundScapeApp() {
 
-@Composable
-fun LoginWithSpotifyButton() {
-    val context = LocalContext.current
-    Button(
-        onClick = { spotifyLogin(context) })
-    {
-        Text("Login With Spotify")
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = SoundScapeScreen.Login.name
+    ) {
+
+        composable(SoundScapeScreen.Login.name) {
+            LoginBody(
+                onClickContinueLocal = {navController.navigate(SoundScapeScreen.Main.name)} )
+        }
+
+        composable(SoundScapeScreen.Main.name) {
+            MainBody()
+        }
+
     }
 }
 
-@Composable
-fun ContinueWithLocalButton() {
-    Button(onClick = { /*TODO*/ })
-    {
-        Text(text = "Continue")
-    }
-}
 
