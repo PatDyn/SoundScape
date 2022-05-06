@@ -32,9 +32,9 @@ jobs:
         with:
           java-version: 11
       - name: Build APK
-        run: bash ./gradlew assembleDebug --stacktrace
         with:
           SPOTIFY_CLIENT_ID: ${{ secrets.spotify_client_secret }}
+        run: bash ./gradlew assembleDebug --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
