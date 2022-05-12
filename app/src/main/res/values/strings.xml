@@ -3,4 +3,7 @@
     <string name="log_in_with_spotify">Log in with Spotify</string>
     <string name="Continue">Continue</string>
     <string name="list_bars">List Bars</string>
+    <string name="Login">Login</string>
+    <string name="LogoContentDescription">The Soundscape Logo</string>
 </resources>
+

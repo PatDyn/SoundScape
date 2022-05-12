@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_wide">16dp</dimen>
+    <dimen name="margin_half">8dp</dimen>
+    <dimen name="margin_text_size">24dp</dimen>
+    <dimen name="box_text_size">24dp</dimen>
+    <dimen name="logo_size_horizontal">125.dp</dimen>
+    <dimen name="logo_size_vertical">125.dp</dimen>
+</resources>

@@ -9,6 +9,5 @@ fun LoginBody(
 ) {
     Column() {
         LoginWithSpotifyButton()
-        ContinueWithLocalButton(onClickContinueLocal)
     }
 }

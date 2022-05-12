@@ -10,8 +10,5 @@ fun MainBody() {
         ListBarsButton()
     }
     Card() {
-
-
     }
-
 }

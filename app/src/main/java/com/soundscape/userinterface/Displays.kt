@@ -23,7 +23,7 @@ fun BarDisplay(
 }
 
 @Composable
-fun BarCard(name: String) {
+fun BarListItem(name: String) {
     Card(
         modifier = Modifier
             .padding(10.dp)
@@ -60,7 +60,7 @@ fun BarList(bars: List<Bar>) {
             }
         }
         items(bars) { bar ->
-            BarCard(bar.name)
+            BarListItem(bar.name)
         }
     }
 }

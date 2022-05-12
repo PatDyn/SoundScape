@@ -23,6 +23,7 @@ import com.soundscape.infrastructure.SpotifyConstants
 import com.soundscape.infrastructure.findActivity
 import com.soundscape.userinterface.LoginBody
 import com.soundscape.userinterface.MainBody
+import com.soundscape.userinterface.StartOffBody
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,12 +69,17 @@ fun SoundScapeApp() {
 
     NavHost(
         navController = navController,
-        startDestination = SoundScapeScreen.Login.name
+        startDestination = SoundScapeScreen.StartOff.name
     ) {
+        composable(SoundScapeScreen.StartOff.name) {
+            StartOffBody(
+                onClickGoToLoginScreen = {navController.navigate(SoundScapeScreen.Login.name)},
+                onClickContinueLocal = {navController.navigate(SoundScapeScreen.Main.name)}
+            )
+        }
 
         composable(SoundScapeScreen.Login.name) {
-            LoginBody(
-                onClickContinueLocal = {navController.navigate(SoundScapeScreen.Main.name)} )
+            LoginBody()
         }
 
         composable(SoundScapeScreen.Main.name) {

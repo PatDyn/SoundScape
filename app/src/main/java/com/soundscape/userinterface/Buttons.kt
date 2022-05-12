@@ -28,6 +28,13 @@ fun ContinueWithLocalButton(onClick: () -> Unit) {
     }
 }
 
+@Composable
+fun GoToLoginScreen(onClick: () -> Unit) {
+    Button(onClick = onClick) {
+        Text(stringResource(R.string.Login))
+    }
+}
+
 
 @Composable
 fun ListBarsButton() {
