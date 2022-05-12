@@ -15,7 +15,6 @@
             <option value="$USER_HOME$/Documents/Programming/Android/SoundScape/app/mylibrary" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
