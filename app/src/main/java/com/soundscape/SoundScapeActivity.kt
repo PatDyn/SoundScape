@@ -8,14 +8,19 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
@@ -29,32 +34,32 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // TODO: Add a theme for consistent colouring
-            SoundScapeApp()
+            SoundScapeTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) { // TODO: Modify theme to match our specs
+                    SoundScapeApp()
+                }
+            }
         }
     }
 }
 
-
-fun spotifyLogin(context: Context) {
-    val activity = context.findActivity()
-    val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
-        SpotifyConstants.CLIENT_ID,
-        AuthorizationResponse.Type.TOKEN,
-        SpotifyConstants.REDIRECT_URI
-    ).setScopes(Array<String>(1){"user-read-private,user-top-read"})
-    /* user-read private, for profile pic and name,
-    *  user-top-read, gets top tracks (or artists, up to 50) from all time,
-    *  last ~6months or ~4weeks.*/
-
-    val request: AuthorizationRequest = builder.build()
-
-    AuthorizationClient.openLoginActivity(
-        activity,
-        SpotifyConstants.AUTH_TOKEN_REQUEST_CODE as Int,
-        request
-    )
-}
+/*
+TODO:
+    * Create ViewModel for loading list of bars
+    * passing modifiers - for view consistency i gues
+    * Functionality to BottomAppBar: Make the buttons show the expected screens
+    * Make a floating search bar
+        * make it pass things to a function
+    * Refactorings:
+        * State Hoisting:
+            * for bar list
+            * map position
+            * the search
+        *
+ */
 
 @Preview(showBackground = true)
 @Composable
@@ -64,7 +69,6 @@ fun SoundScapePreview(){
 
 @Composable
 fun SoundScapeApp() {
-
     val navController = rememberNavController()
 
     NavHost(

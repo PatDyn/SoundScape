@@ -7,7 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.soundscape.R
-import com.soundscape.spotifyLogin
+import com.soundscape.domain.spotifyLogin
 import com.soundscape.infrastructure.getBarList
 
 @Composable
@@ -29,7 +29,7 @@ fun ContinueWithLocalButton(onClick: () -> Unit) {
 }
 
 @Composable
-fun GoToLoginScreen(onClick: () -> Unit) {
+fun GoToLoginScreenButton(onClick: () -> Unit) {
     Button(onClick = onClick) {
         Text(stringResource(R.string.Login))
     }

@@ -53,7 +53,7 @@ fun StartOffBody(
         }
         // column for continue, login
         Column() {
-            GoToLoginScreen(onClickGoToLoginScreen)
+            GoToLoginScreenButton(onClickGoToLoginScreen)
             ContinueWithLocalButton(onClickContinueLocal)
         }
     }
