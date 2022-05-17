@@ -48,17 +48,8 @@ class MainActivity : ComponentActivity() {
 
 /*
 TODO:
-    * Create ViewModel for loading list of bars
-    * passing modifiers - for view consistency i gues
-    * Functionality to BottomAppBar: Make the buttons show the expected screens
     * Make a floating search bar
         * make it pass things to a function
-    * Refactorings:
-        * State Hoisting:
-            * for bar list
-            * map position
-            * the search
-        *
  */
 
 @Preview(showBackground = true)

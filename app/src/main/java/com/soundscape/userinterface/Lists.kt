@@ -6,21 +6,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.soundscape.domain.Bar
 
-
-@Composable
-fun BarDisplay(
-    bars: List<Bar>
-    ) {
-    Card() {
-        BarList(bars)
-    }
-}
 
 @Composable
 fun BarListItem(name: String) {

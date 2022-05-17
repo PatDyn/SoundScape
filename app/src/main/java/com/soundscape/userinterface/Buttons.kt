@@ -1,9 +1,12 @@
 package com.soundscape.userinterface
 
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.soundscape.R
@@ -35,18 +38,31 @@ fun GoToLoginScreenButton(onClick: () -> Unit) {
     }
 }
 
-
 @Composable
 fun ListBarsButton() {
     var clicked by remember { mutableStateOf(false) }
     if (clicked) {
         val context = LocalContext.current
         val bars = getBarList(context)
-        BarDisplay(bars) }
+        DiscoverCard(bars) }
     else {
         TextButton(onClick = { clicked = true } )
         {
             Text(stringResource(R.string.list_bars))
+        }
+    }
+}
+
+@Composable
+fun DiscoverButton(name: String, onClick: () -> Unit, icon : ImageVector ) {
+    Box() {
+        IconButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Row() {
+                Icon(imageVector = icon, contentDescription = null)
+                Text(name)
+            }
         }
     }
 }
