@@ -23,7 +23,7 @@ fun StartOffBody(
         // row for logo
         Row() {
             Image(
-                painter = painterResource(R.drawable.logo),
+                painter = painterResource(R.drawable.ic_logoalt),
                 contentDescription = stringResource(R.string.LogoContentDescription),
                 modifier = Modifier.size(
                     dimensionResource(R.dimen.logo_size_horizontal),
