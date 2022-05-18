@@ -3,34 +3,16 @@ package com.soundscape.userinterface
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.soundscape.domain.Bar
-
-
-@Composable
-fun BarListItem(name: String) {
-    Card(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        shape = MaterialTheme.shapes.medium,
-        elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.surface
-    ) {
-        Text(text = name)
-    }
-}
-
+import com.soundscape.domain.Location
 
 @Composable
-fun BarList(bars: List<Bar>) {
+fun BarList(locations: List<Location>) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp)
@@ -50,8 +32,8 @@ fun BarList(bars: List<Bar>) {
                 )
             }
         }
-        items(bars) { bar ->
-            BarListItem(bar.name)
+        items(locations) { location ->
+            LocationSmallCard(location)
         }
     }
 }

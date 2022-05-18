@@ -37,7 +37,7 @@ fun MainBody(
             }
             if (bottomActionViewModel.views["Discover"] == true) {
                 val context = LocalContext.current
-                DiscoverCard(bars = getBarList(context))
+                DiscoverCard(locations = getBarList(context))
             }
             if (bottomActionViewModel.views["Saved"] == true) {
                 SavedCard()
