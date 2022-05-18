@@ -1,5 +1,6 @@
 package com.soundscape.userinterface
 
+import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,11 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.simplewellness.ui.theme.Purple200
-import com.example.simplewellness.ui.theme.Purple500
-import com.example.simplewellness.ui.theme.Purple700
-import com.example.simplewellness.ui.theme.Teal200
+import com.example.simplewellness.ui.theme.PurpleAction
+import com.example.simplewellness.ui.theme.Grey300
 import com.soundscape.domain.Bar
+
 
 
 @Composable
@@ -40,7 +40,7 @@ fun SavedCard() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.fillMaxWidth().background(Purple200),
+        Row(modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.surface),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             DiscoverButton("Favourites", {}, Icons.Outlined.Star)
