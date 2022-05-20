@@ -3,9 +3,7 @@ package com.soundscape.userinterface
 import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.Icon
@@ -50,6 +48,7 @@ fun BottomActionBar(
 
             BottomNavigationItem(
                 icon = { Icon(painterResource(R.drawable.ic_discover), "Discover") },
+
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { showStates.toggleExclusive("Discover") },
@@ -83,6 +82,8 @@ fun TopSearchBar() {
         Modifier
             .background(MaterialTheme.colors.background)
             .height(48.dp)
+            .fillMaxWidth()
+
 
 
     ) {
