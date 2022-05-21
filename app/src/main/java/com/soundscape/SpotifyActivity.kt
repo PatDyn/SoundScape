@@ -11,6 +11,8 @@ import com.spotify.sdk.android.auth.AuthorizationResponse
 import se.michaelthelin.spotify.SpotifyApi
 import se.michaelthelin.spotify.model_objects.specification.Paging
 import se.michaelthelin.spotify.model_objects.specification.Track
+import se.michaelthelin.spotify.model_objects.specification.User
+import java.lang.Exception
 
 
 class SpotifyActivity: Activity() {
@@ -49,15 +51,22 @@ class SpotifyActivity: Activity() {
                     .setAccessToken(response.accessToken)
                     .build()
 
+                // TODO: Make this async
                 val topTracksRequest = spotifyApi.usersTopTracks.build()
                 try {
-                    // Execute the request synchronous
-                    val userTopTracks: Paging<Track> = topTracksRequest.execute()
-                    println(String.format("%i tracks", userTopTracks.items.size))
+                    val tracks: Paging<Track> = topTracksRequest.execute()
+                    intent?.putExtra("tracks", tracks)
                 } catch (e: Exception) {
                     println(e.message)
                 }
 
+                val userProfileRequest = spotifyApi.currentUsersProfile.build()
+                try {
+                    val user: User = userProfileRequest.execute()
+                    intent?.putExtra("user", user);
+                } catch (e: Exception) {
+                    println(e.message)
+                }
             }
             AuthorizationResponse.Type.ERROR -> {}
             else -> {}
