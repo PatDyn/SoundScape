@@ -1,5 +1,6 @@
 package com.soundscape.userinterface
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.*
@@ -10,14 +11,18 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.soundscape.R
-import com.soundscape.domain.spotifyLogin
+import com.soundscape.SpotifyActivity
 import com.soundscape.infrastructure.getBarList
 
 @Composable
 fun LoginWithSpotifyButton() {
     val context = LocalContext.current
+    val spotifyIntent = Intent(context, SpotifyActivity::class.java)
+
     Button(
-        onClick = { spotifyLogin(context) })
+        onClick = {
+            context.startActivity(spotifyIntent)
+        })
     {
         Text(stringResource(R.string.log_in_with_spotify))
     }
