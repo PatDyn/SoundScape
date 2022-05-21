@@ -8,14 +8,12 @@ import com.soundscape.infrastructure.SpotifyConstants
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
-import okhttp3.Call
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import se.michaelthelin.spotify.SpotifyApi
+import se.michaelthelin.spotify.model_objects.specification.Paging
+import se.michaelthelin.spotify.model_objects.specification.Track
 
 
 class SpotifyActivity: Activity() {
-    private val client = OkHttpClient()
     private val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
         SpotifyConstants.CLIENT_ID,
         AuthorizationResponse.Type.TOKEN,
@@ -47,14 +45,19 @@ class SpotifyActivity: Activity() {
 
         when (response.type) {
             AuthorizationResponse.Type.TOKEN -> {
-                val request: Request = Request.Builder()
-                    .url("https://api.spotify.com/v1/me/top/tracks")
-                    .header("Authorization", String.format("Bearer %s", response.accessToken))
+                val spotifyApi = SpotifyApi.Builder()
+                    .setAccessToken(response.accessToken)
                     .build()
 
-                val call: Call = client.newCall(request)
-                val topTracksResponse: Response = call.execute()
-                println(topTracksResponse.message())
+                val topTracksRequest = spotifyApi.usersTopTracks.build()
+                try {
+                    // Execute the request synchronous
+                    val userTopTracks: Paging<Track> = topTracksRequest.execute()
+                    println(String.format("%i tracks", userTopTracks.items.size))
+                } catch (e: Exception) {
+                    println(e.message)
+                }
+
             }
             AuthorizationResponse.Type.ERROR -> {}
             else -> {}
