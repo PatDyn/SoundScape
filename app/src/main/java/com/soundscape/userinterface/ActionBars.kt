@@ -35,7 +35,7 @@ fun BottomActionBar(
     showStates: BottomActionViewModel
 ) {
     BottomAppBar(
-        backgroundColor = MaterialTheme.colors.background,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 10.dp,
         content = {
             BottomNavigationItem(

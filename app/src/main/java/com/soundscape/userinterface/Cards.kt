@@ -16,11 +16,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.simplewellness.ui.theme.Purple200
 import com.soundscape.domain.Location
-
-
+import java.util.*
 
 
 @Composable
@@ -39,7 +42,9 @@ fun SavedCard() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.surface),
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colors.surface),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             DiscoverButton("Favourites", {}, Icons.Outlined.Star)
@@ -68,48 +73,72 @@ fun LocationSmallCard(location: Location) {
             .wrapContentHeight(),
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.surface
+        backgroundColor = MaterialTheme.colors.background
     ) {
-        Box() {
-            Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-                Column() { // contains name type distance etc
-                    Text(location.name)
+        Box(modifier = Modifier.padding(6.dp)) {
+            Row(horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.fillMaxWidth()) { // contains name type distance etc
+                    Row(modifier = Modifier.fillMaxWidth()
+                    ) {
+                            Column(modifier = Modifier.width(320.dp)) {
+                                Text(text = location.name,
+                                    style = MaterialTheme.typography.h2,
+                                    color = MaterialTheme.colors.onBackground,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis)
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                            Column() {
+                                Text(text = location.matchScore,
+                                    style = MaterialTheme.typography.h2,
+                                    color = MaterialTheme.colors.onBackground,)
+                            }
+                    }
+
                     Row() {
-                        Text(location.locationType)
-                        Text(location.distance)
+                        Text(text = location.locationType.capitalize() + " · " + location.distance,
+                            style = MaterialTheme.typography.body1,
+                            color = MaterialTheme.colors.onSurface)
                     }
                     Row() {
                         if (location.isOpen) {
                             Text(text = "open",
+                                style = MaterialTheme.typography.body1,
                                 color = Color.Green
                             )
                         } else {
                             Text(text = "closed",
+                                style = MaterialTheme.typography.body1,
                                 color = Color.Red
                             )
                         }
-                        Text(location.getClosingTime())
+                        Text(text = " · " + location.getClosingTime(),
+                            style = MaterialTheme.typography.body1,
+                            color = MaterialTheme.colors.onSurface)
                     }
                     LazyRow() {
 
                         items(location.genres) { genre ->
-                            Text(genre)
+                            Text(text = genre,
+                            style = MaterialTheme.typography.body1,
+                            color = MaterialTheme.colors.onSurface)
                         }
                     }
                     Row(modifier = Modifier.background(Color.Gray) ) {
                         Text("Here Buttons will appear")
                     }
                 }
-                Column(
+                /*Column(
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) { // contains match score
                     Text(location.matchScore)
-                }
+                }*/
 
             }
 
         }
-        Text(text = location.name)
+
     }
 }

@@ -15,7 +15,7 @@ import com.soundscape.domain.Location
 fun BarList(locations: List<Location>) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(16.dp)
+        //contentPadding = PaddingValues(16.dp)
     ) {
         item {
             Row(

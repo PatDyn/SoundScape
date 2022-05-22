@@ -61,7 +61,7 @@ fun SoundScapeTheme(
 
     if(darkTheme){
         systemUiController.setNavigationBarColor(
-            color = Grey500,
+            color = Grey300,
         )
         {color -> Grey200
 
