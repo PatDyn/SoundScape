@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 locationHash = location?.let {
                     GeoHash.withCharacterPrecision(
                         it.latitude,
-                        location.longitude,
+                        it.longitude,
                         5
                     ).toString()
                 };
