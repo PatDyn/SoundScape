@@ -16,7 +16,4 @@ class LocationCardViewModel(location: Location? = null) : ViewModel() {
     fun toggleDetailView() {
         _showDetail = !_showDetail
     }
-
-
-
 }

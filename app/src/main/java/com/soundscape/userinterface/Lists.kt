@@ -2,11 +2,16 @@ package com.soundscape.userinterface
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.HorizontalAlignmentLine
+import androidx.compose.ui.layout.VerticalAlignmentLine
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.soundscape.domain.Location
 
@@ -48,20 +53,24 @@ fun LocationList(
 }
 
 @Composable
-fun HorizontalTagList(location: Location) { // TODO: Add state once necessary
-    val stylesEven = location.musicalStyles.filterIndexed() { index, _ -> index.mod(2) == 0 }
-    val stylesOdd = location.musicalStyles.filterIndexed() { index, _ -> index.mod(2) != 0 }
+fun HorizontalList(strings: List<String>) {
+    LazyRow(
+        modifier = Modifier
+            .padding(start = 4.dp, end = 4.dp)
+    ) {
+        items(strings) { genre ->
+            Text(
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+                text = genre,
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.onSurface)
+            Divider(
+                color = MaterialTheme.colors.onSurface,
+                modifier = Modifier
+                    .height(18.dp)
+                    .width(2.dp)
 
-    LazyRow(modifier = Modifier.fillMaxWidth()) {
-        items(stylesEven) {
-                musicalStyle -> Text(
-            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
-            text = musicalStyle)
-        }
-        items(stylesOdd) {
-                musicalStyle -> Text(
-            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
-            text = musicalStyle)
+            )
         }
     }
 }

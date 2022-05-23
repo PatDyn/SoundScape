@@ -19,10 +19,9 @@ class Location(
     val distance = "999km"
     val isOpen = false
     //val openingHours get() = this.tags["opening_hours"] ?: "NoOpeningHours"
-    val genres = listOf("Metal", "Drum and Bass", "Psytrance")
+    val genres = listOf("#Metal", "#DrumAndBass", "#Psytrance", "#Schlager", "#Pop", "#IndieRock")
     val matchScore = "99%"
     val website : String get() = this.tags["contact:website"] ?: "NoWebsite"
-    val musicalStyles : List<String> = listOf("#Metal", "#DrumAndBass", "#Psytrance", "#Schlager", "#Pop", "#IndieRock")
     val events : List<String> = listOf("Metal Night", "DrumAndBass Night", "Goa Night", "Oldies Night")
     val description : String = "asfdjkl asdfjsalkdj alskdfjsalkfj alskdfj kdfj asdfsadf kasdfj dkjd d ff asdf"
 

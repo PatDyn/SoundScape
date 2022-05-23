@@ -39,7 +39,7 @@ fun DetailsBody(
             ) {
                 Text(text = location.website)
             }
-            HorizontalTagList(location = location)
+            HorizontalList(location.genres)
             LocationDescriptionCard(location)
             EventsCard(location)
             Row() {

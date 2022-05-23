@@ -62,13 +62,7 @@ fun EventsCard(location: Location) {
     Card() {
         Column() {
             Text(text = stringResource(R.string.location_upcoming_events))
-            LazyRow(
-            ) {
-            items(location.events) {
-                event -> Text(
-                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
-                text = event)}
-            }
+            HorizontalList(strings = location.events)
         }
     }
 }
@@ -111,30 +105,16 @@ fun LocationSmallCard(
                                     color = MaterialTheme.colors.onBackground,)
                             }
                     }
-
                     Row() {
                         Text(text = location.locationType.replaceFirstChar { it.uppercase() } + " · " + location.distance,
                             style = MaterialTheme.typography.body1,
                             color = MaterialTheme.colors.onSurface)
                     }
                     BarOpeningInfo(location)
-                    LazyRow() {
-                        items(location.genres) { genre ->
-                            Text(text = genre,
-                            style = MaterialTheme.typography.body1,
-                            color = MaterialTheme.colors.onSurface)
-                        }
-                    }
+                    HorizontalList(location.genres)
                     Row(modifier = Modifier.background(Color.Gray) ) {
                         Text("Here Buttons will appear")
                     }
-                }
-                Column(
-                    Modifier.weight(1F),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) { // contains match score
-                    Text(location.matchScore)
                 }
             }
         }
