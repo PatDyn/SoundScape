@@ -1,18 +1,23 @@
 package com.soundscape.userinterface
 
+import android.telecom.Call
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.soundscape.domain.Location
 
 @Composable
-fun BarList(locations: List<Location>) {
+fun BarList(
+    bottomActionViewModel: BottomActionViewModel,
+    onClickGoToDetailScreen: () -> Unit = {}
+) {
+    val locations = bottomActionViewModel.locations
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         //contentPadding = PaddingValues(16.dp)
@@ -33,7 +38,23 @@ fun BarList(locations: List<Location>) {
             }
         }
         items(locations) { location ->
-            LocationSmallCard(location)
+            LocationSmallCard(location, bottomActionViewModel, onClickGoToDetailScreen)
         }
+    }
+}
+
+@Composable
+fun HorizontalTagList(location: Location) { // TODO: Add state once necessary
+    val stylesEven = location.musicalStyles.filterIndexed() { index, _ -> index.mod(2) == 0 }
+    val stylesOdd = location.musicalStyles.filterIndexed() { index, _ -> index.mod(2) != 0 }
+
+    LazyRow(modifier = Modifier.fillMaxWidth()) {
+            items(stylesEven) {
+                    musicalStyle -> Text(musicalStyle)
+            }
+
+            items(stylesOdd) {
+                    musicalStyle -> Text(musicalStyle)
+            }
     }
 }

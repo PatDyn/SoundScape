@@ -11,16 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.soundscape.infrastructure.getBarList
 
-@Preview
-@Composable
-fun PreviewMainBody() {
-    MainBody()
-}
-
 @Composable
 fun MainBody(
     modifier: Modifier = Modifier,
-    bottomActionViewModel: BottomActionViewModel = viewModel()
+    bottomActionViewModel: BottomActionViewModel,
+    onClickGoToDetailsScreen: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = { BottomActionBar(bottomActionViewModel)
@@ -36,14 +31,11 @@ fun MainBody(
                 TopSearchBar()
             }
             if (bottomActionViewModel.views["Discover"] == true) {
-                val context = LocalContext.current
-                DiscoverCard(locations = getBarList(context))
+                DiscoverCard(bottomActionViewModel, onClickGoToDetailsScreen)
             }
             if (bottomActionViewModel.views["Saved"] == true) {
                 SavedCard()
             }
-
-
         }
     }
 }

@@ -1,13 +1,12 @@
 package com.soundscape.userinterface
 
-import android.content.res.Resources
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.outlined.Star
@@ -16,22 +15,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import com.example.simplewellness.ui.theme.Purple200
+import com.soundscape.R
 import com.soundscape.domain.Location
 import java.util.*
 
 
 @Composable
 fun DiscoverCard(
-    locations: List<Location>
+    bottomActionViewModel: BottomActionViewModel,
+    onClickGoToDetailScreen: () -> Unit = {}
     ) {
     Card() {
-        BarList(locations)
+       BarList(bottomActionViewModel, onClickGoToDetailScreen)
     }
 }
 
@@ -61,23 +60,36 @@ fun FavouritesCard() {}
 fun MyCrawlsCard() {}
 
 @Composable
-fun EventsCard() {}
+fun EventsCard(location: Location) {
+    Card() {
+        Text(text = stringResource(R.string.location_upcoming_events))
+        LazyRow() {
+            items(location.events) {
+                event -> Text(text = event)
+            }
+        }
+    }
+}
 
-// hier muss ne bar liste rein
 @Composable
-fun LocationSmallCard(location: Location) {
+fun LocationSmallCard(
+    location: Location,
+    bottomActionViewModel: BottomActionViewModel,
+    onClickGoToDetailScreen: () -> Unit = {}
+    ) {
+    bottomActionViewModel.location = location
     Card(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable( onClick = onClickGoToDetailScreen ),
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.background
     ) {
         Box(modifier = Modifier.padding(6.dp)) {
-            Row(horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.fillMaxWidth()) { // contains name type distance etc
                     Row(modifier = Modifier.fillMaxWidth()
                     ) {
@@ -97,28 +109,12 @@ fun LocationSmallCard(location: Location) {
                     }
 
                     Row() {
-                        Text(text = location.locationType.capitalize() + " · " + location.distance,
+                        Text(text = location.locationType.replaceFirstChar { it.uppercase() } + " · " + location.distance,
                             style = MaterialTheme.typography.body1,
                             color = MaterialTheme.colors.onSurface)
                     }
-                    Row() {
-                        if (location.isOpen) {
-                            Text(text = "open",
-                                style = MaterialTheme.typography.body1,
-                                color = Color.Green
-                            )
-                        } else {
-                            Text(text = "closed",
-                                style = MaterialTheme.typography.body1,
-                                color = Color.Red
-                            )
-                        }
-                        Text(text = " · " + location.getClosingTime(),
-                            style = MaterialTheme.typography.body1,
-                            color = MaterialTheme.colors.onSurface)
-                    }
+                    BarOpeningInfo(location)
                     LazyRow() {
-
                         items(location.genres) { genre ->
                             Text(text = genre,
                             style = MaterialTheme.typography.body1,
@@ -129,16 +125,42 @@ fun LocationSmallCard(location: Location) {
                         Text("Here Buttons will appear")
                     }
                 }
-                /*Column(
+                Column(
+                    Modifier.weight(1F),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) { // contains match score
                     Text(location.matchScore)
-                }*/
-
+                }
             }
-
         }
+    }
+}
 
+@Composable
+fun LocationDescriptionCard(location: Location) {
+    Card() {
+        Text(text = "${stringResource(id = R.string.location_about)} + ${location.name}")
+        Text(text = location.description)
+    }
+}
+
+@Composable
+fun BarOpeningInfo(location: Location) {
+    Row() {
+        if (location.isOpen) {
+            Text(text = "open",
+                style = MaterialTheme.typography.body1,
+                color = Color.Green
+            )
+        } else {
+            Text(text = "closed",
+                style = MaterialTheme.typography.body1,
+                color = Color.Red
+            )
+        }
+        Text(text = " · " + location.getClosingTime(),
+            style = MaterialTheme.typography.body1,
+            color = MaterialTheme.colors.onSurface)
     }
 }

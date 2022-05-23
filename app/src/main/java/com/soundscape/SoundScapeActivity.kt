@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.NavHost
@@ -20,22 +21,24 @@ import ch.hsr.geohash.GeoHash
 import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.soundscape.userinterface.LoginBody
-import com.soundscape.userinterface.MainBody
-import com.soundscape.userinterface.StartOffBody
+import com.soundscape.userinterface.*
 
 class MainActivity : ComponentActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var locationHash: String? = null
+    //private var locationHash: String? = null
 
     // TODO: This should be used to filter locations using:
     // locations.filter(location -> location.hash.startsWith(hash))
+    /*
     fun getLocationHash(): String? {
         return locationHash
     }
 
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -65,6 +68,8 @@ class MainActivity : ComponentActivity() {
                 };
             }
 
+         */
+
         setContent {
             SoundScapeTheme {
                 Surface(
@@ -82,6 +87,8 @@ class MainActivity : ComponentActivity() {
 TODO:
     * Make a floating search bar
         * make it pass things to a function
+    * Class for musicTags
+    * Class for events
  */
 
 @Preview(showBackground = true)
@@ -92,8 +99,9 @@ fun SoundScapePreview(){
 
 @Composable
 fun SoundScapeApp() {
+    val context = LocalContext.current
     val navController = rememberNavController()
-
+    val bottomActionViewModel = BottomActionViewModel(context)
     NavHost(
         navController = navController,
         startDestination = SoundScapeScreen.StartOff.name
@@ -110,7 +118,15 @@ fun SoundScapeApp() {
         }
 
         composable(SoundScapeScreen.Main.name) {
-            MainBody()
+            MainBody(
+                modifier = Modifier,
+                bottomActionViewModel,
+                onClickGoToDetailsScreen = {navController.navigate(SoundScapeScreen.Detail.name)}
+            )
+        }
+
+        composable(SoundScapeScreen.Detail.name) {
+            DetailsBody(bottomActionViewModel)
         }
 
     }
