@@ -1,6 +1,5 @@
 package com.soundscape.userinterface
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,22 +14,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.soundscape.R
 import com.soundscape.domain.Location
-import java.util.*
 
 
 @Composable
 fun DiscoverCard(
+    clickedIndex: Int,
     bottomActionViewModel: BottomActionViewModel,
-    onClickGoToDetailScreen: () -> Unit = {}
+    onClickGoToDetailScreen: (Int) -> Unit = {}
     ) {
     Card() {
-       BarList(bottomActionViewModel, onClickGoToDetailScreen)
+       LocationList(clickedIndex, bottomActionViewModel, onClickGoToDetailScreen)
     }
 }
 
@@ -62,10 +60,11 @@ fun MyCrawlsCard() {}
 @Composable
 fun EventsCard(location: Location) {
     Card() {
-        Text(text = stringResource(R.string.location_upcoming_events))
-        LazyRow() {
+        Column() {
+            Text(text = stringResource(R.string.location_upcoming_events))
+            LazyRow() {
             items(location.events) {
-                event -> Text(text = event)
+                event -> Text(text = event)}
             }
         }
     }
@@ -74,16 +73,18 @@ fun EventsCard(location: Location) {
 @Composable
 fun LocationSmallCard(
     location: Location,
+    index: Int,
+    clickedIndex: Int,
     bottomActionViewModel: BottomActionViewModel,
-    onClickGoToDetailScreen: () -> Unit = {}
+    onClickGoToDetailScreen: (Int) -> Unit = {}
     ) {
-    bottomActionViewModel.location = location
+    bottomActionViewModel.location = bottomActionViewModel.locations[clickedIndex]
     Card(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable( onClick = onClickGoToDetailScreen ),
+            .clickable(onClick = { onClickGoToDetailScreen.invoke(index) }),
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.background
@@ -140,8 +141,10 @@ fun LocationSmallCard(
 @Composable
 fun LocationDescriptionCard(location: Location) {
     Card() {
-        Text(text = "${stringResource(id = R.string.location_about)} + ${location.name}")
-        Text(text = location.description)
+        Column() {
+            Text(text = "${stringResource(id = R.string.location_about)} + ${location.name}")
+            Text(text = location.description)
+        }
     }
 }
 

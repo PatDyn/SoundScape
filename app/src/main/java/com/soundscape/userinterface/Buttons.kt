@@ -4,14 +4,17 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.rounded.Place
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.soundscape.R
@@ -78,7 +81,11 @@ fun AddFavButton(onClick: () -> Unit) { // TODO: Extend with onClick and state w
 
 @Composable
 fun AddToCrawlButton(location: Location) {
-    IconButton(onClick = { /*TODO*/ }) {
+    IconButton(
+        modifier = Modifier.size(
+            dimensionResource(R.dimen.logo_button_size_horizontal),
+            dimensionResource(R.dimen.logo_button_size_vertical)),
+        onClick = { /*TODO*/ }) {
         Icon(painter = painterResource(R.drawable.logo),
             contentDescription = "${stringResource(id = R.string.add_to_crawl)} + ${location.name}"
         )
@@ -87,7 +94,11 @@ fun AddToCrawlButton(location: Location) {
 
 @Composable
 fun RouteButton(location: Location) {
-    IconButton(onClick = { /*TODO*/ }) {
+    IconButton(
+        modifier = Modifier.size(
+            dimensionResource(R.dimen.logo_button_size_horizontal),
+            dimensionResource(R.dimen.logo_button_size_vertical)),
+        onClick = { /*TODO*/ }) {
         Icon(imageVector = Icons.Rounded.Place,
             contentDescription = "${stringResource(id = R.string.Route)} + ${location.name}"
         )        

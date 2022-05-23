@@ -6,4 +6,6 @@
     <dimen name="box_text_size">24dp</dimen>
     <dimen name="logo_size_horizontal">125.dp</dimen>
     <dimen name="logo_size_vertical">125.dp</dimen>
+    <dimen name="logo_button_size_horizontal">48.dp</dimen>
+    <dimen name="logo_button_size_vertical">48.dp</dimen>
 </resources>

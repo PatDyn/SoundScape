@@ -1,26 +1,20 @@
 package com.soundscape
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ch.hsr.geohash.GeoHash
 import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.soundscape.userinterface.*
 
 class MainActivity : ComponentActivity() {
@@ -101,6 +95,7 @@ fun SoundScapePreview(){
 fun SoundScapeApp() {
     val context = LocalContext.current
     val navController = rememberNavController()
+    var clickedIndex by remember { mutableStateOf(0) }
     val bottomActionViewModel = BottomActionViewModel(context)
     NavHost(
         navController = navController,
@@ -120,9 +115,12 @@ fun SoundScapeApp() {
         composable(SoundScapeScreen.Main.name) {
             MainBody(
                 modifier = Modifier,
-                bottomActionViewModel,
-                onClickGoToDetailsScreen = {navController.navigate(SoundScapeScreen.Detail.name)}
-            )
+                clickedIndex,
+                bottomActionViewModel
+            ) { index: Int ->
+                clickedIndex = index
+                navController.navigate(SoundScapeScreen.Detail.name)
+            }
         }
 
         composable(SoundScapeScreen.Detail.name) {
