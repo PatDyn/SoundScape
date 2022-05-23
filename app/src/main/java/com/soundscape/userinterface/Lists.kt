@@ -53,12 +53,15 @@ fun HorizontalTagList(location: Location) { // TODO: Add state once necessary
     val stylesOdd = location.musicalStyles.filterIndexed() { index, _ -> index.mod(2) != 0 }
 
     LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(stylesEven) {
-                    musicalStyle -> Text(musicalStyle)
-            }
-
-            items(stylesOdd) {
-                    musicalStyle -> Text(musicalStyle)
-            }
+        items(stylesEven) {
+                musicalStyle -> Text(
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+            text = musicalStyle)
+        }
+        items(stylesOdd) {
+                musicalStyle -> Text(
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+            text = musicalStyle)
+        }
     }
 }

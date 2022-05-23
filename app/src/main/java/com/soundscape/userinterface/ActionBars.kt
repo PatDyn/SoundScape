@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.soundscape.R
+import org.intellij.lang.annotations.JdkConstants
 
 
 /* map, discover, saved, more buttons
@@ -36,7 +37,6 @@ fun BottomActionBar(
 
             BottomNavigationItem(
                 icon = { Icon(painterResource(R.drawable.ic_discover), "Discover") },
-
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Discover") },
@@ -64,13 +64,15 @@ fun BottomActionBar(
 
 @Composable
 fun TopSearchBar() {
-    // floating search bar
-    Row(
-        Modifier
-            .background(MaterialTheme.colors.background)
-            .height(48.dp)
-            .fillMaxWidth()
-    ) {
-        Text("Search Bar")
+    Card() {
+        Row(
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .height(64.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            TextField(value = "Search for Location, Genres, #tags ...", onValueChange = {})
+        }
     }
 }

@@ -62,9 +62,12 @@ fun EventsCard(location: Location) {
     Card() {
         Column() {
             Text(text = stringResource(R.string.location_upcoming_events))
-            LazyRow() {
+            LazyRow(
+            ) {
             items(location.events) {
-                event -> Text(text = event)}
+                event -> Text(
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+                text = event)}
             }
         }
     }
@@ -142,7 +145,6 @@ fun LocationSmallCard(
 fun LocationDescriptionCard(location: Location) {
     Card() {
         Column() {
-            Text(text = "${stringResource(id = R.string.location_about)} + ${location.name}")
             Text(text = location.description)
         }
     }
