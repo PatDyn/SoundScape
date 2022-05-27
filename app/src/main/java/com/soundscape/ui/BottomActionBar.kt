@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +30,7 @@ fun BottomActionBar(
         elevation = 10.dp,
         content = {
             BottomNavigationItem(
-                icon = { Column() {
+                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(painterResource(R.drawable.ic_place), stringResource(R.string.Map))
                     Text(stringResource(R.string.Map))
                 }},
@@ -40,7 +41,7 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column() {
+                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(painterResource(R.drawable.ic_discover), stringResource(R.string.Discover))
                     Text(stringResource(R.string.Discover))
                 }},
@@ -51,7 +52,7 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column() {
+                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(painterResource(R.drawable.ic_bookmark), stringResource(R.string.Saved))
                     Text(stringResource(R.string.Saved))
                 }},
@@ -62,7 +63,7 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column() {
+                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(painterResource(R.drawable.ic_morehoriz), stringResource(R.string.More))
                     Text(stringResource(R.string.More))
                 }},
