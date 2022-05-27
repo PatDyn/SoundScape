@@ -1,5 +1,6 @@
 package com.soundscape
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,7 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.soundscape.userinterface.*
+import com.soundscape.ui.*
 
 class MainActivity : ComponentActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -93,10 +95,11 @@ fun SoundScapePreview(){
 
 @Composable
 fun SoundScapeApp() {
-    val context = LocalContext.current
+    val context =  LocalContext.current
     val navController = rememberNavController()
     var clickedIndex by remember { mutableStateOf(0) }
     val bottomActionViewModel = BottomActionViewModel(context)
+
     NavHost(
         navController = navController,
         startDestination = SoundScapeScreen.StartOff.name
@@ -115,14 +118,11 @@ fun SoundScapeApp() {
         composable(SoundScapeScreen.Main.name) {
             MainBody(
                 modifier = Modifier,
-                clickedIndex,
-                bottomActionViewModel
-            ) { index: Int ->
-                clickedIndex = index
-                navController.navigate(SoundScapeScreen.Detail.name)
-            }
+                clickedIndex = clickedIndex,
+                viewModel = bottomActionViewModel,
+                onClickGoToDetailsScreen = { index: Int -> clickedIndex = index; navController.navigate(SoundScapeScreen.Detail.name) }
+            )
         }
-
         composable(SoundScapeScreen.Detail.name) {
             DetailsBody(bottomActionViewModel)
         }

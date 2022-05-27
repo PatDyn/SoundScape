@@ -28,4 +28,8 @@ class Location(
     fun getClosingTime() : String  {
         return "4 am"
     }
+
+    fun getOpeningTime() : String {
+        return "8 pm"
+    }
 }

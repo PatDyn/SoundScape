@@ -2,6 +2,8 @@
     <string name="add_to_favourites">Add to favourites</string>
     <string name="add_to_crawl">Add to crawl </string>
     <string name="app_name">SoundScape</string>
+    <string name="closed">closed</string>
+    <string name="closes">closes</string>
     <string name="Continue">Continue</string>
     <string name="list_bars">List Bars</string>
     <string name="location_photo_description">A photo of </string>
@@ -10,6 +12,8 @@
     <string name="Login">Login</string>
     <string name="log_in_with_spotify">Log in with Spotify</string>
     <string name="LogoContentDescription">The Soundscape Logo</string>
+    <string name="open">open</string>
+    <string name="opens">opens</string>
     <string name="Route">Route to </string>
 </resources>
 
