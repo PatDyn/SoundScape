@@ -8,6 +8,7 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.soundscape.R
 
@@ -28,7 +29,10 @@ fun BottomActionBar(
         elevation = 10.dp,
         content = {
             BottomNavigationItem(
-                icon = { Icon(painterResource(R.drawable.ic_place), "Map") },
+                icon = { Column() {
+                    Icon(painterResource(R.drawable.ic_place), stringResource(R.string.Map))
+                    Text(stringResource(R.string.Map))
+                }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Map") },
@@ -36,7 +40,10 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Icon(painterResource(R.drawable.ic_discover), "Discover") },
+                icon = { Column() {
+                    Icon(painterResource(R.drawable.ic_discover), stringResource(R.string.Discover))
+                    Text(stringResource(R.string.Discover))
+                }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Discover") },
@@ -44,7 +51,10 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Icon(painterResource(R.drawable.ic_bookmark), "Saved") },
+                icon = { Column() {
+                    Icon(painterResource(R.drawable.ic_bookmark), stringResource(R.string.Saved))
+                    Text(stringResource(R.string.Saved))
+                }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Saved") },
@@ -52,7 +62,10 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Icon(painterResource(R.drawable.ic_morehoriz), "More") },
+                icon = { Column() {
+                    Icon(painterResource(R.drawable.ic_morehoriz), stringResource(R.string.More))
+                    Text(stringResource(R.string.More))
+                }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("More") },

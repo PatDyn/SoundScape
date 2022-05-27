@@ -21,21 +21,21 @@ fun LocationList(
         modifier = Modifier.fillMaxWidth(),
         //contentPadding = PaddingValues(16.dp)
     ) {
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(vertical = 25.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    "Bars",
-                    style = MaterialTheme.typography.h3
-                )
-            }
-        }
+//        item {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .wrapContentHeight()
+//                    .padding(vertical = 25.dp),
+//                horizontalArrangement = Arrangement.Center,
+//                verticalAlignment = Alignment.CenterVertically
+//           ) {
+//                Text(
+//                    "Discover Locations",
+//                    style = MaterialTheme.typography.h3
+//                )
+//            }
+//        }
         items(count = locations.size) { index ->
             LocationSmallCard(
                 locations[index],
