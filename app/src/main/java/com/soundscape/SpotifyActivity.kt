@@ -1,7 +1,9 @@
 package com.soundscape
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import com.soundscape.infrastructure.SpotifyConstants
@@ -27,6 +29,28 @@ class SpotifyActivity: Activity() {
 
     public override fun onStart() {
         super.onStart()
+
+        //initial spotify token
+        var SPOTIFY_TOKEN: String = ""
+
+
+        //call to save the access token Permanently //TODO call when token is generated
+        fun saveToken(token: String) {
+            val saveToken : SharedPreferences = getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
+            with(saveToken.edit()){
+                putString("USER_SPOTIFY_ACCESS_TOKEN", token)
+                apply()
+            }
+        }
+
+        fun loadToken(){
+            val savedToken : SharedPreferences = getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
+            SPOTIFY_TOKEN = savedToken.getString("USER_SPOTIFY_ACCESS_TOKEN", "").toString()
+        }
+
+        loadToken()
+        //TODO if (SPOTIFY_TOKEN == "") bla bla open login activity ( "" is default value)
+
 
         val policy = ThreadPolicy.Builder().permitNetwork().build()
         StrictMode.setThreadPolicy(policy)
