@@ -15,61 +15,74 @@ import com.soundscape.R
 
 @Composable
 fun StartOffBody(
+    modifier: Modifier = Modifier,
     onClickContinueLocal: () -> Unit = {},
     onClickGoToLoginScreen: () -> Unit = {}
 ) {
     // column parent
     Column {
-
         // row for logo
-        Row(horizontalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ) {
             Image(
                 painter = painterResource(R.drawable.ic_logoalt),
                 contentDescription = stringResource(R.string.LogoContentDescription),
-                modifier = Modifier.size(
+                modifier = modifier.size(
                     dimensionResource(R.dimen.logo_size_horizontal),
                     dimensionResource(R.dimen.logo_size_vertical)
 
                 )
             )
         }
-        Row(horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()) {
-            Text(text = "SoundScape",
-
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "SoundScape",
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colors.primary,
                 fontSize = 42.sp
             )
         }
         // row for search bar description
-        Row(horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()) {
-            Text(text = "set your music preferences",
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "set your music preferences",
                 style = MaterialTheme.typography.h2)
         }
 
         // row for tag search bar
-        Row(horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()){
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ){
             Text("Searchbar")
         }
         // two columns in row for tags
-        Row(horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ) {
             Column() {
-                Text("Tags")
-                Text("Tags")
+                Text("#Genres")
+                Text("#Genres")
             }
             Column() {
-                Text("Tags")
-                Text("Tags")
+                Text("#Genres")
+                Text("#Genres")
             }
         }
         // column for continue, login
-        Row(horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxWidth()
+        ) {
             Column() {
                 GoToLoginScreenButton(onClickGoToLoginScreen)
                 ContinueWithLocalButton(onClickContinueLocal)

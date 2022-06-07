@@ -81,10 +81,16 @@ class MainActivity : ComponentActivity() {
 
 /*
 TODO:
-    * Make a floating search bar
+    - [x] Make a floating search bar
         * make it pass things to a function
     * Class for musicTags
     * Class for events
+        * name
+        * description
+        * startEndTime
+        * hostLocation
+    * Get Double Row Genre List
+    * Modifiers in composables
  */
 
 @Preview(showBackground = true)
@@ -99,6 +105,7 @@ fun SoundScapeApp() {
     val navController = rememberNavController()
     var clickedIndex by remember { mutableStateOf(0) }
     val bottomActionViewModel = BottomActionViewModel(context)
+    var modifier = Modifier
 
     NavHost(
         navController = navController,
@@ -106,27 +113,32 @@ fun SoundScapeApp() {
     ) {
         composable(SoundScapeScreen.StartOff.name) {
             StartOffBody(
+                modifier = modifier,
                 onClickGoToLoginScreen = {navController.navigate(SoundScapeScreen.Login.name)},
                 onClickContinueLocal = {navController.navigate(SoundScapeScreen.Main.name)}
             )
         }
 
         composable(SoundScapeScreen.Login.name) {
-            LoginBody()
+            LoginBody(
+                modifier = modifier
+            )
         }
 
         composable(SoundScapeScreen.Main.name) {
             MainBody(
-                modifier = Modifier,
+                modifier = modifier,
                 clickedIndex = clickedIndex,
                 viewModel = bottomActionViewModel,
                 onClickGoToDetailsScreen = { index: Int -> clickedIndex = index; navController.navigate(SoundScapeScreen.Detail.name) }
             )
         }
         composable(SoundScapeScreen.Detail.name) {
-            DetailsBody(bottomActionViewModel)
+            DetailsBody(
+                bottomActionViewModel = bottomActionViewModel,
+                modifier = modifier
+            )
         }
-
     }
 }
 

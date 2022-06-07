@@ -26,42 +26,61 @@ import com.soundscape.domain.Location
 fun DiscoverCard(
     clickedIndex: Int,
     bottomActionViewModel: BottomActionViewModel,
+    modifier: Modifier = Modifier,
     onClickGoToDetailScreen: (Int) -> Unit = {}
     ) {
-    Card() {
-       LocationList(clickedIndex, bottomActionViewModel, onClickGoToDetailScreen)
+    Card(
+        modifier = modifier
+    ) {
+       LocationList(
+           clickedIndex = clickedIndex,
+           bottomActionViewModel = bottomActionViewModel,
+           onClickGoToDetailScreen = onClickGoToDetailScreen)
     }
 }
 
 @Composable
-fun SavedCard() {
+fun SavedCard(
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier,
+        modifier = modifier,
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier
+        Row(modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colors.surface),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            DiscoverButton("Favourites", {}, Icons.Outlined.Star)
-            DiscoverButton("My Crawls", {}, Icons.Filled.AccountBox)
-            DiscoverButton("Events", {}, Icons.Rounded.List)
+            SavedNavButton("Favourites", {}, Icons.Outlined.Star)
+            SavedNavButton("My Crawls", {}, Icons.Filled.AccountBox)
+            SavedNavButton("Events", {}, Icons.Rounded.List)
         }
     }
 }
 
 @Composable
-fun FavouritesCard() {}
+fun FavouritesCard(
+    modifier: Modifier = Modifier
+) {}
 
 @Composable
-fun MyCrawlsCard() {}
+fun MyCrawlsCard(
+    modifier: Modifier = Modifier
+) {}
 
 @Composable
-fun EventsCard(location: Location) {
-    Card() {
-        Column() {
+fun EventsCard(
+    location: Location,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+    ) {
+        Column(
+            modifier = modifier
+        ) {
             Text(text = stringResource(R.string.location_upcoming_events))
             HorizontalList(strings = location.events)
         }
@@ -74,11 +93,12 @@ fun LocationSmallCard(
     index: Int,
     clickedIndex: Int,
     bottomActionViewModel: BottomActionViewModel,
-    onClickGoToDetailScreen: (Int) -> Unit = {}
+    modifier: Modifier = Modifier,
+    onClickGoToDetailScreen: (Int) -> Unit = {},
     ) {
     bottomActionViewModel.location = bottomActionViewModel.locations[clickedIndex]
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(10.dp)
             .fillMaxWidth()
             .wrapContentHeight()
@@ -87,33 +107,55 @@ fun LocationSmallCard(
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.background
     ) {
-        Box(modifier = Modifier.padding(6.dp)) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.fillMaxWidth()) { // contains name type distance etc
-                    Row(modifier = Modifier.fillMaxWidth()
+        Box(
+            modifier = modifier.padding(6.dp)
+        ) {
+            Row(
+                modifier = modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = modifier.fillMaxWidth()
+                ) { // contains name type distance etc
+                    Row(
+                        modifier = modifier.fillMaxWidth()
                     ) {
-                            Column(modifier = Modifier.width(320.dp)) {
-                                Text(text = location.name,
+                            Column(
+                                modifier = modifier.width(320.dp)
+                            ) {
+                                Text(
+                                    text = location.name,
                                     style = MaterialTheme.typography.h2,
                                     color = MaterialTheme.colors.onBackground,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis)
                             }
-                            Spacer(modifier = Modifier.weight(1f))
-                            Column() {
-                                Text(text = location.matchScore,
+                            Spacer(
+                                modifier = modifier.weight(1f)
+                            )
+                            Column(
+                                modifier = modifier
+                            ) {
+                                Text(
+                                    text = location.matchScore,
                                     style = MaterialTheme.typography.h2,
-                                    color = MaterialTheme.colors.onBackground,)
+                                    color = MaterialTheme.colors.onBackground
+                                )
                             }
                     }
-                    Row() {
-                        Text(text = location.locationType.replaceFirstChar { it.uppercase() } + " · " + location.distance,
+                    Row(
+                        modifier = modifier
+                    ) {
+                        Text(
+                            text = location.locationType.replaceFirstChar { it.uppercase() } + " · " + location.distance,
                             style = MaterialTheme.typography.body1,
-                            color = MaterialTheme.colors.onSurface)
+                            color = MaterialTheme.colors.onSurface
+                        )
                     }
                     BarOpeningInfo(location)
                     HorizontalList(location.genres)
-                    Row(modifier = Modifier.background(Color.Gray) ) {
+                    Row(
+                        modifier = modifier.background(Color.Gray)
+                    ) {
                         Text("Here Buttons will appear")
                     }
                 }
@@ -123,20 +165,32 @@ fun LocationSmallCard(
 }
 
 @Composable
-fun LocationDescriptionCard(location: Location) {
-    Card() {
-        Column() {
+fun LocationDescriptionCard(
+    location: Location,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+    ) {
+        Column(
+            modifier = modifier
+        ) {
             Text(text = location.description)
         }
     }
 }
 
 @Composable
-fun BarOpeningInfo(location: Location) {
-
+fun BarOpeningInfo(
+    location: Location,
+    modifier: Modifier = Modifier
+) {
     if (location.isOpen) {
-        Row() {
-            Text(text = "${stringResource(R.string.open)}",
+        Row(
+            modifier = modifier
+        ) {
+            Text(
+                text = "${stringResource(R.string.open)}",
                 style = MaterialTheme.typography.body1,
                 color = Color.Green
             )
@@ -145,12 +199,16 @@ fun BarOpeningInfo(location: Location) {
                 color = MaterialTheme.colors.onSurface)
         }
     } else {
-        Row() {
-            Text(text = "${stringResource(R.string.closed)}",
+        Row(
+            modifier = modifier
+        ) {
+            Text(
+                text = "${stringResource(R.string.closed)}",
                 style = MaterialTheme.typography.body1,
                 color = Color.Red
             )
-            Text(text = " · ${stringResource(R.string.opens)} " + location.getOpeningTime(),
+            Text(
+                text = " · ${stringResource(R.string.opens)} " + location.getOpeningTime(),
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface)
         }
@@ -160,14 +218,19 @@ fun BarOpeningInfo(location: Location) {
 @Composable
 fun TopSearchBarCard(
     onSearchClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var text by rememberSaveable { mutableStateOf("") }
     var activeSearchbar by rememberSaveable { mutableStateOf(false) }
 
-    Card() {
-        Column() {
+    Card(
+        modifier = modifier
+    ) {
+        Column(
+            modifier = modifier
+        ) {
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .background(MaterialTheme.colors.background)
                     .height(64.dp)
                     .fillMaxWidth(),
@@ -175,7 +238,7 @@ fun TopSearchBarCard(
             ) {
                 TextField(
                     placeholder = {
-                        Text("Search for Location, Events, #tags ...")
+                        Text("Search for Location, Events, #Genres ...")
                         activeSearchbar = false
                     },
                     value = text,
@@ -196,7 +259,9 @@ fun TopSearchBarCard(
                 )
             }
             if (activeSearchbar) {
-                Row() {
+                Row(
+                    modifier = modifier
+                ) {
                     TextButton(onClick = { /*TODO*/ }) {
                         Text(text = "All")
                     }
@@ -207,7 +272,7 @@ fun TopSearchBarCard(
                         Text(text = "Events")
                     }
                     TextButton(onClick = { /*TODO*/ }) {
-                        Text(text = "#tags")
+                        Text(text = "#Genres")
                     }
                 }
             }

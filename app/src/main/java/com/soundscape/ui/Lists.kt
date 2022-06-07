@@ -14,57 +14,46 @@ import androidx.compose.ui.unit.dp
 fun LocationList(
     clickedIndex: Int,
     bottomActionViewModel: BottomActionViewModel,
+    modifier: Modifier = Modifier,
     onClickGoToDetailScreen: (Int) -> Unit = {}
 ) {
     val locations = bottomActionViewModel.locations
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         //contentPadding = PaddingValues(16.dp)
     ) {
-//        item {
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .wrapContentHeight()
-//                    .padding(vertical = 25.dp),
-//                horizontalArrangement = Arrangement.Center,
-//                verticalAlignment = Alignment.CenterVertically
-//           ) {
-//                Text(
-//                    "Discover Locations",
-//                    style = MaterialTheme.typography.h3
-//                )
-//            }
-//        }
         items(count = locations.size) { index ->
             LocationSmallCard(
-                locations[index],
-                index,
-                clickedIndex,
-                bottomActionViewModel,
-                onClickGoToDetailScreen)
+                location = locations[index],
+                index = index,
+                clickedIndex = clickedIndex,
+                modifier = modifier,
+                bottomActionViewModel = bottomActionViewModel,
+                onClickGoToDetailScreen = onClickGoToDetailScreen
+            )
         }
     }
 }
 
 @Composable
-fun HorizontalList(strings: List<String>) {
+fun HorizontalList(
+    strings: List<String>,
+    modifier: Modifier = Modifier
+) {
     LazyRow(
-        modifier = Modifier
-            .padding(start = 4.dp, end = 4.dp)
+        modifier = modifier.padding(start = 4.dp, end = 4.dp)
     ) {
         items(strings) { genre ->
             Text(
-                modifier = Modifier.padding(start = 4.dp, end = 4.dp),
+                modifier = modifier.padding(start = 4.dp, end = 4.dp),
                 text = genre,
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.onSurface)
             Divider(
                 color = MaterialTheme.colors.onSurface,
-                modifier = Modifier
+                modifier = modifier
                     .height(18.dp)
                     .width(2.dp)
-
             )
         }
     }

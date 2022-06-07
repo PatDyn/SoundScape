@@ -25,7 +25,7 @@ class Location(
     val events : List<String> = listOf("Metal Night", "DrumAndBass Night", "Goa Night", "Oldies Night")
     val description : String = "asfdjkl asdfjsalkdj alskdfjsalkfj alskdfj kdfj asdfsadf kasdfj dkjd d ff asdf"
 
-    fun getClosingTime() : String  {
+    fun getClosingTime() : String {
         return "4 am"
     }
 

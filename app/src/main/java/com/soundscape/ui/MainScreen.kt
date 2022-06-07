@@ -10,9 +10,9 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun MainBody(
-    modifier: Modifier = Modifier,
     clickedIndex: Int,
     viewModel: BottomActionViewModel,
+    modifier: Modifier = Modifier,
     onClickGoToDetailsScreen: (Int) -> Unit = {},
 ) {
     Scaffold(
@@ -20,24 +20,28 @@ fun MainBody(
     ) {
         Box {
             Box( // map main view
-                Modifier
+                modifier = modifier
                     .fillMaxSize()
                     .background(Color.Gray)
             )
             if (viewModel.views["Map"]!!) {
                 TopSearchBarCard(
-                    {}
+                    {},
+                    modifier = modifier
                 )
             }
             if (viewModel.views["Discover"] == true) {
                 DiscoverCard(
-                    clickedIndex,
-                    viewModel,
-                    onClickGoToDetailsScreen
+                    clickedIndex = clickedIndex,
+                    bottomActionViewModel = viewModel,
+                    modifier = modifier,
+                    onClickGoToDetailScreen = onClickGoToDetailsScreen
                 )
             }
             if (viewModel.views["Saved"] == true) {
-                SavedCard()
+                SavedCard(
+                    modifier = modifier
+                )
             }
         }
     }

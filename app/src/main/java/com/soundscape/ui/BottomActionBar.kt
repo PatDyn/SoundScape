@@ -23,17 +23,23 @@ import com.soundscape.R
 
 @Composable
 fun BottomActionBar(
-    bottomActionViewModel: BottomActionViewModel
+    bottomActionViewModel: BottomActionViewModel,
+    modifier: Modifier = Modifier
 ) {
     BottomAppBar(
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 10.dp,
         content = {
             BottomNavigationItem(
-                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painterResource(R.drawable.ic_place), stringResource(R.string.Map))
-                    Text(stringResource(R.string.Map))
-                }},
+                modifier = modifier,
+                icon = {
+                    Column(
+                        modifier = modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(painterResource(R.drawable.ic_place), stringResource(R.string.Map))
+                        Text(stringResource(R.string.Map))
+                    }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Map") },
@@ -41,10 +47,15 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painterResource(R.drawable.ic_discover), stringResource(R.string.Discover))
-                    Text(stringResource(R.string.Discover))
-                }},
+                modifier = modifier,
+                icon = {
+                    Column(
+                        modifier = modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(painterResource(R.drawable.ic_discover), stringResource(R.string.Discover))
+                        Text(stringResource(R.string.Discover))
+                    }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
                 onClick = { bottomActionViewModel.toggleExclusive("Discover") },
@@ -52,9 +63,14 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painterResource(R.drawable.ic_bookmark), stringResource(R.string.Saved))
-                    Text(stringResource(R.string.Saved))
+                modifier = modifier,
+                icon = {
+                    Column(
+                        modifier = modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(painterResource(R.drawable.ic_bookmark), stringResource(R.string.Saved))
+                        Text(stringResource(R.string.Saved))
                 }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,
@@ -63,9 +79,14 @@ fun BottomActionBar(
             )
 
             BottomNavigationItem(
-                icon = { Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painterResource(R.drawable.ic_morehoriz), stringResource(R.string.More))
-                    Text(stringResource(R.string.More))
+                modifier = modifier,
+                icon = {
+                    Column(
+                        modifier = modifier,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(painterResource(R.drawable.ic_morehoriz), stringResource(R.string.More))
+                        Text(stringResource(R.string.More))
                 }},
                 selectedContentColor= MaterialTheme.colors.primary,
                 unselectedContentColor= MaterialTheme.colors.onSurface,

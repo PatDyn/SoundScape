@@ -14,7 +14,8 @@ import com.soundscape.R
 
 @Composable
 fun DetailsBody(
-    bottomActionViewModel: BottomActionViewModel
+    bottomActionViewModel: BottomActionViewModel,
+    modifier: Modifier = Modifier
 ) {
     val location = bottomActionViewModel.location
     Card() {
@@ -23,8 +24,8 @@ fun DetailsBody(
                 AddFavButton({})
                 Text(text = location!!.name)
                 Text(
+                    modifier = modifier.weight(1f),
                     text = location!!.matchScore,
-                    Modifier.weight(1f)
                 )
             }
             BarOpeningInfo(location!!)
@@ -42,7 +43,10 @@ fun DetailsBody(
             HorizontalList(location.genres)
             LocationDescriptionCard(location)
             EventsCard(location)
-            Row() {
+            Row(
+                modifier = modifier,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 AddToCrawlButton(location)
                 RouteButton(location)
             }
