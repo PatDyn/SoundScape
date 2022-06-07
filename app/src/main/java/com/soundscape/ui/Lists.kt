@@ -8,7 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.dp
+import java.lang.Float
 
 @Composable
 fun LocationList(
@@ -40,20 +43,24 @@ fun HorizontalList(
     strings: List<String>,
     modifier: Modifier = Modifier
 ) {
+    var maxBaseline by remember { mutableStateOf(0f) }
+    fun updateMaxBaseline(textLayoutResult: TextLayoutResult) {
+        maxBaseline =
+            Float.max(maxBaseline, textLayoutResult.size.height - textLayoutResult.lastBaseline)
+    }
+    val topBaselinePadding = with(LocalDensity.current) { maxBaseline.toDp() }
     LazyRow(
-        modifier = modifier.padding(start = 4.dp, end = 4.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        contentPadding = PaddingValues(horizontal = 8.dp)
     ) {
         items(strings) { genre ->
             Text(
-                modifier = modifier.padding(start = 4.dp, end = 4.dp),
+                modifier = modifier.padding(bottom = topBaselinePadding),
                 text = genre,
                 style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.onSurface)
-            Divider(
                 color = MaterialTheme.colors.onSurface,
-                modifier = modifier
-                    .height(18.dp)
-                    .width(2.dp)
+                onTextLayout = ::updateMaxBaseline
             )
         }
     }

@@ -1,21 +1,21 @@
 package com.soundscape.ui
 
 import android.content.Intent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.rounded.Place
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
@@ -24,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.soundscape.R
 import com.soundscape.SpotifyActivity
 import com.soundscape.domain.Location
+import java.lang.Float.max
 
 @Composable
 fun LoginWithSpotifyButton(
@@ -76,15 +77,33 @@ fun SavedNavButton(
     icon : ImageVector,
     modifier: Modifier = Modifier
 ) {
-    IconButton(
-        modifier = modifier,
-        onClick = onClick
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null
-        )
-        Text(name)
+    Box ()
+    {
+        IconButton(
+            modifier = modifier,
+            onClick = onClick
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.Top,
+            ) {
+                var maxBaseline by remember { mutableStateOf(0f) }
+                fun updateMaxBaseline(textLayoutResult: TextLayoutResult) {
+                    maxBaseline = max(maxBaseline, textLayoutResult.size.height - textLayoutResult.lastBaseline)
+                }
+                val topBaselinePadding = with(LocalDensity.current) { maxBaseline.toDp() }
+                Icon(
+                    modifier = Modifier.padding(bottom = topBaselinePadding),
+                    imageVector = icon,
+                    contentDescription = null,
+                )
+                Text(
+                    modifier = Modifier.paddingFromBaseline(bottom = topBaselinePadding),
+                    text = name,
+                    onTextLayout = ::updateMaxBaseline
+                )
+            }
+        }
     }
 }
 
