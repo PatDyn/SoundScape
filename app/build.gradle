@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.plugin.serialization'
 }
@@ -51,6 +53,11 @@ android {
 }
 
 dependencies {
+    // Room
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
+
     def nav_version = "2.4.2"
     implementation "androidx.navigation:navigation-compose:$nav_version"
     // Integration with activities
