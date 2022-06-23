@@ -18,24 +18,29 @@ import java.lang.Exception
 
 
 /* ToDo: Implementing PKCE
-
         need to add state for security
-
         for pkce add val code_challenge_method = "S256"
         code_challenge = hash(generate.random.string(), SHA256, length = 64)
-
         (requestCode, state) = result of sending authrequest to spotify api
-
         val uri = intent?.data
         val response = AuthorizationResponse.fromUri(uri)
-
-
-
-
-
-
-
+        General Info: https://developer.spotify.com/documentation/general/guides/authorization/
+        Authorization Code Flow: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
  */
+
+/* ToDo: Saving the tokens
+    using dataStore and dataStoreManager pattern
+    https://developer.android.com/topic/libraries/architecture/datastore#kts
+    https://levelup.gitconnected.com/modern-data-storage-on-android-meet-jetpack-datastore-part-1-2-9f314c994fc8
+    Working Example:
+    https://github.com/sunny52525/JetSpotify
+ */
+
+/* ToDO: Integrate with JetpackCompose
+    Working Example:
+    https://github.com/sunny52525/JetSpotify
+*/
+
 
 
 class SpotifyActivity : Activity() {
