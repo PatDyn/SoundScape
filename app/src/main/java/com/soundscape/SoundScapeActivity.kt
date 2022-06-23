@@ -81,16 +81,15 @@ class MainActivity : ComponentActivity() {
 
 /*
 TODO:
-    - [x] Make a floating search bar
+    * [x] Make a floating search bar
         * make it pass things to a function
-    * Class for musicTags
     * Class for events
         * name
         * description
         * startEndTime
         * hostLocation
     * Get Double Row Genre List
-    * Modifiers in composables
+    * Layout for Login Screen
  */
 
 @Preview(showBackground = true)

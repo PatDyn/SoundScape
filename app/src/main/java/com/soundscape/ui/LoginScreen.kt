@@ -17,9 +17,7 @@ fun LoginBody(
         Column(
             modifier = modifier
         ) {
-            LoginWithSpotifyButton(
-
-            )
+            LoginWithSpotifyButton()
         }
 
     }

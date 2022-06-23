@@ -32,10 +32,10 @@ fun StartOffBody(
                 modifier = modifier.size(
                     dimensionResource(R.dimen.logo_size_horizontal),
                     dimensionResource(R.dimen.logo_size_vertical)
-
                 )
             )
         }
+
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = modifier.fillMaxWidth()

@@ -1,6 +1,6 @@
 package com.soundscape
 
-enum class SoundScapeScreen/*TODO: Add constructors once needed*/ {
+enum class SoundScapeScreen {
     StartOff,
     Login,
     Main,

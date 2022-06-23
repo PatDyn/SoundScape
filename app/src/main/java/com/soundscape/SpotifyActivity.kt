@@ -17,45 +17,74 @@ import se.michaelthelin.spotify.model_objects.specification.User
 import java.lang.Exception
 
 
-class SpotifyActivity: Activity() {
+/* ToDo: Implementing PKCE
+
+        need to add state for security
+
+        for pkce add val code_challenge_method = "S256"
+        code_challenge = hash(generate.random.string(), SHA256, length = 64)
+
+        (requestCode, state) = result of sending authrequest to spotify api
+
+        val uri = intent?.data
+        val response = AuthorizationResponse.fromUri(uri)
+
+
+
+
+
+
+
+ */
+
+
+class SpotifyActivity : Activity() {
+
+    // build user authorization request
     private val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
         SpotifyConstants.CLIENT_ID,
-        AuthorizationResponse.Type.TOKEN,
-        SpotifyConstants.REDIRECT_URI
-    ).setScopes(Array(1){"user-read-private,user-top-read"})
+        AuthorizationResponse.Type.TOKEN, // needs to be .CODE
+        SpotifyConstants.REDIRECT_URI,
+    ).setScopes(Array(1) { "user-read-private,user-top-read" }) // probably delete user-read-private
+
     /* user-read private, for profile pic and name,
     *  user-top-read, gets top tracks (or artists, up to 50) from all time,
     *  last ~6months or ~4weeks.*/
 
     public override fun onStart() {
+
         super.onStart()
 
         //initial spotify token
         var SPOTIFY_TOKEN: String = ""
 
-
         //call to save the access token Permanently //TODO call when token is generated
         fun saveToken(token: String) {
-            val saveToken : SharedPreferences = getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
-            with(saveToken.edit()){
+            val saveToken: SharedPreferences =
+                getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
+
+            with(saveToken.edit()) {
                 putString("USER_SPOTIFY_ACCESS_TOKEN", token)
                 apply()
             }
         }
 
-        fun loadToken(){
-            val savedToken : SharedPreferences = getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
+        fun loadToken() {
+            val savedToken: SharedPreferences =
+                getSharedPreferences("USER_SPOTIFY_ACCESS_TOKEN", Context.MODE_PRIVATE)
+
             SPOTIFY_TOKEN = savedToken.getString("USER_SPOTIFY_ACCESS_TOKEN", "").toString()
         }
 
         loadToken()
         //TODO if (SPOTIFY_TOKEN == "") bla bla open login activity ( "" is default value)
 
-
         val policy = ThreadPolicy.Builder().permitNetwork().build()
         StrictMode.setThreadPolicy(policy)
+
         val request: AuthorizationRequest = builder.build()
         AuthorizationClient.openLoginInBrowser(this, request)
+
         /*AuthorizationClient.openLoginActivity(
             this,
             AUTH_TOKEN_REQUEST_CODE as Int,
@@ -64,9 +93,10 @@ class SpotifyActivity: Activity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent);
-        val uri = intent?.data
 
+        super.onNewIntent(intent);
+
+        val uri = intent?.data
         val response = AuthorizationResponse.fromUri(uri)
 
         when (response.type) {
