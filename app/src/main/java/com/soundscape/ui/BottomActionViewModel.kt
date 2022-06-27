@@ -4,16 +4,26 @@ import android.content.Context
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
 import com.soundscape.domain.Location
+
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 private fun getBarList(context: Context) : List<Location> {
-    val text = context.assets.open("bars_tuebingen.jsonl").bufferedReader().readText()
+    val text = context.assets.open("locations_tuebingen.jsonl").bufferedReader().readText()
     val lines = text.split("\r?\n|\r".toRegex()).toTypedArray()
     return lines.map { Json.decodeFromString(it) }
 }
 
 class BottomActionViewModel(context: Context) : ViewModel() {
+
+    //insert a test location
+    /*
+    init {
+        val locationDao = LocationRoomDatabase.getInstance(context).locationDao()
+        viewModelScope.launch {
+            locationDao.insertLocation(testLocation)
+        }
+    }*/
 
     private val _views = mutableStateMapOf(
             "Map" to true,
