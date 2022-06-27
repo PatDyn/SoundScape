@@ -46,12 +46,15 @@ import java.lang.Exception
 class SpotifyActivity : Activity() {
 
 
+    val STATE_STRING = SpotifyConstants.STATE
+
     // build user authorization request
     private val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
         SpotifyConstants.CLIENT_ID,
-        AuthorizationResponse.Type.TOKEN, // needs to be .CODE
-        SpotifyConstants.REDIRECT_URI,
-    ).setScopes(Array(1) { "user-read-private,user-top-read" }) // probably delete user-read-private
+        SpotifyConstants.RESPONSE_TYPE, // needs to be .CODE
+        SpotifyConstants.REDIRECT_URI)
+        .setState(STATE_STRING)
+        .setScopes(Array(1) { "user-read-private,user-top-read" })
 
     /* user-read private, for profile pic and name,
     *  user-top-read, gets top tracks (or artists, up to 50) from all time,
@@ -106,7 +109,7 @@ class SpotifyActivity : Activity() {
         val response = AuthorizationResponse.fromUri(uri)
 
         when (response.type) {
-            AuthorizationResponse.Type.TOKEN -> {
+            AuthorizationResponse.Type.CODE -> { // if CODE exchange for access token
                 val spotifyApi = SpotifyApi.Builder()
                     .setAccessToken(response.accessToken)
                     .build()
