@@ -45,6 +45,7 @@ import java.lang.Exception
 
 class SpotifyActivity : Activity() {
 
+
     // build user authorization request
     private val builder: AuthorizationRequest.Builder = AuthorizationRequest.Builder(
         SpotifyConstants.CLIENT_ID,
