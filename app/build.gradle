@@ -1,10 +1,19 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
+apply plugin: 'dagger.hilt.android.plugin'
+
+/*
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.plugin.serialization'
-}
+    id 'com.google.dagger.hilt.android.plugin' version '2.41'
+}*/
 
 android {
     compileSdk 32
@@ -18,6 +27,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [redirectSchemeName: "spotify-sdk", redirectHostName: "auth"]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
+        }
     }
 
     buildTypes {
@@ -52,7 +67,12 @@ android {
     namespace 'com.soundscape'
 }
 
+
 dependencies {
+    def dagger_version = "2.41"
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
     // Room
     implementation "androidx.room:room-runtime:2.4.2"
     implementation 'androidx.room:room-common:2.3.0'
