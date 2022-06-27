@@ -1,3 +1,4 @@
+/*
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -5,15 +6,16 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
 apply plugin: 'dagger.hilt.android.plugin'
 
-/*
+ */
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.plugin.serialization'
-    id 'com.google.dagger.hilt.android.plugin' version '2.41'
-}*/
+    id 'com.google.dagger.hilt.android' version '2.41' apply false
+}
 
 android {
     compileSdk 32
