@@ -6,6 +6,8 @@
     <string name="closes">Closes</string>
     <string name="Continue">Continue</string>
     <string name="Discover">Discover</string>
+    <string name="Error_Spotify_Response_State_was_null">Error: Spotify Response State was null</string>
+    <string name="Error_Spotify_Authorization_Response_was_error">Error: Spotify Authorization Response was error</string>
     <string name="list_bars">List Bars</string>
     <string name="location_photo_description">A photo of </string>
     <string name="location_about">About </string>
