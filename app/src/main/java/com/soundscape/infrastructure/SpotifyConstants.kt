@@ -13,7 +13,7 @@ object SpotifyConstants {
     val RESPONSE_TYPE = AuthorizationResponse.Type.CODE
     //val RESPONSE_TYPE = "code"
     const val REDIRECT_URI = "soundscape://callback"
-    val STATE = getRandomString(16).toHashed("SHA-256")
+    val STATE = getRandomString(16)
 
     // PKCE
     const val CODE_CHALLENGE_METHOD = "S256"

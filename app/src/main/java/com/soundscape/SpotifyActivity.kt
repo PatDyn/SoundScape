@@ -6,6 +6,8 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.widget.Toast
 import com.soundscape.infrastructure.SpotifyConstants
+import com.soundscape.infrastructure.getRandomString
+import com.soundscape.infrastructure.toBase64Url
 import com.soundscape.infrastructure.toHashed
 import com.spotify.sdk.android.auth.AuthorizationClient
 import com.spotify.sdk.android.auth.AuthorizationRequest
@@ -52,7 +54,7 @@ class SpotifyActivity : Activity() {
 
     private val STATE_STRING = SpotifyConstants.STATE
     private val CODE_VERIFIER = SpotifyConstants.CODE_VERIFIER
-    private val CODE_CHALLENGE = CODE_VERIFIER.toHashed("SHA-256")
+    private val CODE_CHALLENGE = CODE_VERIFIER.toHashed("SHA-256").toBase64Url()
 
     // build user authorization request
 /*
