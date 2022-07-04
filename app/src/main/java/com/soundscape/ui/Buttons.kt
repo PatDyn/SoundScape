@@ -1,5 +1,6 @@
 package com.soundscape.ui
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -21,22 +22,26 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.adamratzman.spotify.auth.pkce.startSpotifyClientPkceLoginActivity
+import com.soundscape.MainActivity
 import com.soundscape.R
 import com.soundscape.SpotifyActivity
 import com.soundscape.domain.Location
+import com.soundscape.pkceClassBackTo
 import java.lang.Float.max
 
 @Composable
 fun LoginWithSpotifyButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    activity: Activity? = null
 ) {
-    val context = LocalContext.current
-    val spotifyIntent = Intent(context, SpotifyActivity::class.java)
+
+    pkceClassBackTo = MainActivity::class.java
 
     Button(
         modifier = modifier,
         onClick = {
-            context.startActivity(spotifyIntent)
+            activity?.startSpotifyClientPkceLoginActivity(SpotifyActivity::class.java)
         })
     {
         Text(stringResource(R.string.log_in_with_spotify))

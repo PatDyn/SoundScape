@@ -1,5 +1,6 @@
 package com.soundscape
 
+import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) { // TODO: Modify theme to match our specs
-                    SoundScapeApp()
+                    SoundScapeApp(activity = this)
                 }
             }
         }
@@ -92,14 +92,14 @@ TODO:
     * Layout for Login Screen
  */
 
-@Preview(showBackground = true)
-@Composable
-fun SoundScapePreview(){
-    SoundScapeApp()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun SoundScapePreview(){
+//    SoundScapeApp(this)
+//}
 
 @Composable
-fun SoundScapeApp() {
+fun SoundScapeApp(activity: Activity?) {
     val context =  LocalContext.current
     val navController = rememberNavController()
     var clickedIndex by remember { mutableStateOf(0) }
@@ -120,7 +120,8 @@ fun SoundScapeApp() {
 
         composable(SoundScapeScreen.Login.name) {
             LoginBody(
-                modifier = modifier
+                modifier = modifier,
+                activity = activity
             )
         }
 

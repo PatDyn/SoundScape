@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId "com.soundscape"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -119,6 +119,7 @@ dependencies {
     implementation 'ch.hsr:geohash:1.4.0'
 
     // spotify
+    implementation 'com.adamratzman:spotify-api-kotlin-core:3.8.6'
     implementation 'se.michaelthelin.spotify:spotify-web-api-java:7.1.0'
     implementation 'com.spotify.android:auth:2.0.2'
 
