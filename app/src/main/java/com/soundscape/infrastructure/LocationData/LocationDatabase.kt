@@ -29,14 +29,18 @@ abstract class LocationDatabase : RoomDatabase() {
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): LocationDatabase {
             return Room.databaseBuilder(context, LocationDatabase::class.java, DATABASE_NAME)
+                .allowMainThreadQueries() // allow main thread queries to DB, just for testing
+                .fallbackToDestructiveMigration()
                 .addCallback(
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
+
                             val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
                                 .setInputData(workDataOf(KEY_FILENAME to LOCATION_DATA_FILENAME))
                                 .build()
                             WorkManager.getInstance(context).enqueue(request)
+
                         }
                     }
                 )
@@ -44,3 +48,13 @@ abstract class LocationDatabase : RoomDatabase() {
         }
     }
 }
+val testLocation = LocationData(
+    id = 1,
+    name = "Test Location",
+    type = "Test Type",
+    lat = 1.3,
+    lon = 1.2,
+    tags = "Test Tags",
+    geohash = "Test GeoHash",
+    favorite = false
+)

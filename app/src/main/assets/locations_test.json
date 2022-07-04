@@ -1,0 +1,22 @@
+[
+  {
+    "id": "123",
+    "name": "Test_bar",
+    "type": "Bar",
+    "lat": 0.7,
+    "lon": 0.6,
+    "tags": "tag1,tag2",
+    "geohash": "geohash",
+    "favorite": false
+  },
+  {
+    "id": "1234",
+    "name": "Tesst_bar",
+    "type": "Bars",
+    "lat": 0.75,
+    "lon": 0.62,
+    "tags": "tag3,tag4",
+    "geohash": "geohashhh",
+    "favorite": true
+  }
+]

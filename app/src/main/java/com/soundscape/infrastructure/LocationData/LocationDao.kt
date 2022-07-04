@@ -1,5 +1,6 @@
 package com.soundscape.infrastructure.LocationData
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.soundscape.infrastructure.LocationData.LocationData as LocationData
 import java.util.concurrent.Flow
@@ -20,7 +21,7 @@ interface LocationDao {
     fun insertAll(locations: List<LocationData>)
 
     @Query("SELECT * FROM location")
-    fun getAllLocations(): List<LocationData>
+    fun getAllLocations(): LiveData<List<LocationData>>
 
     //get location like name
     @Query("SELECT * FROM location WHERE name LIKE :name")
