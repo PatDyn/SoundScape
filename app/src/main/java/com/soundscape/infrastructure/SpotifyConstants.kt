@@ -18,7 +18,6 @@ object SpotifyConstants {
     // PKCE
     const val CODE_CHALLENGE_METHOD = "S256"
     val CODE_VERIFIER = getRandomString(64)
-
 }
 
 

@@ -1,20 +1,12 @@
 package com.soundscape
 
-import android.app.Activity
-import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.soundscape.ui.*
@@ -72,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) { // TODO: Modify theme to match our specs
-                    SoundScapeApp(activity = this)
+                    SoundScapeNavHost(activity = this)
                 }
             }
         }
@@ -91,55 +83,3 @@ TODO:
     * Get Double Row Genre List
     * Layout for Login Screen
  */
-
-//@Preview(showBackground = true)
-//@Composable
-//fun SoundScapePreview(){
-//    SoundScapeApp(this)
-//}
-
-@Composable
-fun SoundScapeApp(activity: Activity?) {
-    val context =  LocalContext.current
-    val navController = rememberNavController()
-    var clickedIndex by remember { mutableStateOf(0) }
-    val bottomActionViewModel = BottomActionViewModel(context)
-    var modifier = Modifier
-
-    NavHost(
-        navController = navController,
-        startDestination = SoundScapeScreen.StartOff.name
-    ) {
-        composable(SoundScapeScreen.StartOff.name) {
-            StartOffBody(
-                modifier = modifier,
-                onClickGoToLoginScreen = {navController.navigate(SoundScapeScreen.Login.name)},
-                onClickContinueLocal = {navController.navigate(SoundScapeScreen.Main.name)}
-            )
-        }
-
-        composable(SoundScapeScreen.Login.name) {
-            LoginBody(
-                modifier = modifier,
-                activity = activity
-            )
-        }
-
-        composable(SoundScapeScreen.Main.name) {
-            MainBody(
-                modifier = modifier,
-                clickedIndex = clickedIndex,
-                viewModel = bottomActionViewModel,
-                onClickGoToDetailsScreen = { index: Int -> clickedIndex = index; navController.navigate(SoundScapeScreen.Detail.name) }
-            )
-        }
-        composable(SoundScapeScreen.Detail.name) {
-            DetailsBody(
-                bottomActionViewModel = bottomActionViewModel,
-                modifier = modifier
-            )
-        }
-    }
-}
-
-
