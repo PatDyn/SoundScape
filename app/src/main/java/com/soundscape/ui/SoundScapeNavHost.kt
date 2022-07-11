@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.soundscape.SoundScapeScreen
+import com.soundscape.infrastructure.SoundScapeConstants
 
 //@Preview(showBackground = true)
 //@Composable
@@ -16,18 +17,21 @@ import com.soundscape.SoundScapeScreen
 //}
 
 @Composable
-fun SoundScapeNavHost(activity: Activity?) {
+fun SoundScapeNavHost(
+    activity: Activity?,
+    navStartDestination: String = SoundScapeConstants.getNavStartDestination()
+) {
     val context =  LocalContext.current
     val navController = rememberNavController()
     var clickedIndex by remember { mutableStateOf(0) }
     val bottomActionViewModel = BottomActionViewModel(context)
-    var modifier = Modifier
+    val modifier = Modifier
 
     // ToDo: Set MainBody as start destination when user has logged in with a service/ or input data
 
     NavHost(
         navController = navController,
-        startDestination = SoundScapeScreen.StartOff.name
+        startDestination = navStartDestination
     ) {
         composable(SoundScapeScreen.StartOff.name) {
             StartOffBody(
@@ -53,6 +57,7 @@ fun SoundScapeNavHost(activity: Activity?) {
                     SoundScapeScreen.Detail.name) }
             )
         }
+
         composable(SoundScapeScreen.Detail.name) {
             DetailsBody(
                 bottomActionViewModel = bottomActionViewModel,

@@ -1,7 +1,6 @@
 package com.soundscape.ui
 
 import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -11,19 +10,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.adamratzman.spotify.auth.pkce.startSpotifyClientPkceLoginActivity
-import com.soundscape.MainActivity
+import com.soundscape.SoundScapeActivity
 import com.soundscape.R
 import com.soundscape.SpotifyActivity
 import com.soundscape.domain.Location
@@ -36,7 +31,7 @@ fun LoginWithSpotifyButton(
     activity: Activity? = null
 ) {
 
-    pkceClassBackTo = MainActivity::class.java
+    pkceClassBackTo = SoundScapeActivity::class.java
 
     Button(
         modifier = modifier,

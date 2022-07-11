@@ -12,4 +12,5 @@ class SoundScapeApplication : Application() {
         model = Model(this.applicationContext)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
+
 }

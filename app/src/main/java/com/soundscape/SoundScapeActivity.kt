@@ -11,7 +11,7 @@ import com.example.simplewellness.ui.theme.SoundScapeTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.soundscape.ui.*
 
-class MainActivity : ComponentActivity() {
+class SoundScapeActivity : ComponentActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     //private var locationHash: String? = null
 
@@ -64,7 +64,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) { // TODO: Modify theme to match our specs
-                    SoundScapeNavHost(activity = this)
+                    SoundScapeNavHost(
+                        activity = this,
+
+                    )
                 }
             }
         }

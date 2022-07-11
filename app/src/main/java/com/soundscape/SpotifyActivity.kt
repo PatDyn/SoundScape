@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.adamratzman.spotify.*
 import com.adamratzman.spotify.auth.pkce.AbstractSpotifyPkceLoginActivity
 import com.soundscape.infrastructure.SpotifyConstants
+import com.soundscape.infrastructure.SoundScapeConstants
 
 internal var pkceClassBackTo: Class<out Activity>? = null
 
@@ -17,7 +18,8 @@ class SpotifyActivity : AbstractSpotifyPkceLoginActivity() {
     override fun onSuccess(api: SpotifyClientApi) {
         val model = (application as SoundScapeApplication).model
         model.credentialStore.setSpotifyApi(api)
-        val classBackTo = pkceClassBackTo ?: MainActivity::class.java
+        SoundScapeConstants.setNavStartDestination(SoundScapeScreen.Main.name)
+        val classBackTo = pkceClassBackTo ?: SoundScapeActivity::class.java
         pkceClassBackTo = null
         Toast.makeText(
             this,
@@ -29,7 +31,7 @@ class SpotifyActivity : AbstractSpotifyPkceLoginActivity() {
 
     override fun onFailure(exception: Exception) {
         exception.printStackTrace()
-        pkceClassBackTo = MainActivity::class.java
+        pkceClassBackTo = SoundScapeActivity::class.java
         Toast.makeText(
             this,
             "Auth failed: ${exception.message}",

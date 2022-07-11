@@ -12,5 +12,4 @@ class Model(context: Context) {
             applicationContext = context
         )
     }
-
 }
